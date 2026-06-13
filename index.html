@@ -579,12 +579,239 @@ footer{
 ::-webkit-scrollbar{width:3px;}
 ::-webkit-scrollbar-track{background:var(--bg);}
 ::-webkit-scrollbar-thumb{background:rgba(0,180,255,0.2);border-radius:2px;}
+
+/* ══════════════════════════════════
+   HAMBURGER BUTTON
+══════════════════════════════════ */
+.hamburger{
+  display:none;
+  position:fixed;top:14px;left:14px;z-index:300;
+  width:42px;height:42px;
+  background:rgba(2,4,9,0.95);
+  border:1px solid var(--border);
+  flex-direction:column;justify-content:center;align-items:center;gap:5px;
+  cursor:pointer;transition:border-color 0.3s;
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+}
+.hamburger:hover{border-color:var(--accent);}
+.hamburger span{
+  display:block;width:20px;height:1.5px;
+  background:var(--accent);
+  transition:transform 0.3s,opacity 0.3s;
+  transform-origin:center;
+}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+/* OVERLAY */
+.sidebar-overlay{
+  display:none;
+  position:fixed;inset:0;
+  background:rgba(0,0,0,0.65);
+  z-index:149;
+  -webkit-backdrop-filter:blur(3px);
+  backdrop-filter:blur(3px);
+  opacity:0;
+  transition:opacity 0.3s;
+}
+.sidebar-overlay.active{display:block;opacity:1;}
+
+/* ══════════════════════════════════
+   TABLET  ≤ 1100px
+══════════════════════════════════ */
+@media(max-width:1100px){
+  .sidebar{width:200px;}
+  .main{margin-left:200px;}
+  .hero{padding:80px 52px;}
+  .section{padding:72px 52px;}
+  footer{padding:24px 52px;}
+  .skills-grid{grid-template-columns:repeat(3,1fr);gap:16px;}
+  .hero-inner{gap:48px;}
+  .hero-photo{width:150px;height:150px;}
+  .exp-item{grid-template-columns:160px 1fr;gap:32px;}
+  .contact-inner{gap:48px;}
+}
+
+/* ══════════════════════════════════
+   SMALL TABLET  ≤ 768px
+══════════════════════════════════ */
+@media(max-width:768px){
+
+  /* hide default cursor on touch */
+  body{cursor:auto;}
+  .cursor,.cursor-ring{display:none;}
+
+  /* HAMBURGER */
+  .hamburger{display:flex;}
+
+  /* SIDEBAR — slide in from left */
+  .sidebar{
+    width:260px;
+    transform:translateX(-100%);
+    transition:transform 0.32s cubic-bezier(0.4,0,0.2,1);
+    z-index:200;
+    box-shadow:4px 0 40px rgba(0,0,0,0.5);
+  }
+  .sidebar.open{transform:translateX(0);}
+
+  /* main fills full width */
+  .main{margin-left:0;}
+
+  /* HERO */
+  .hero{
+    padding:80px 28px 56px;
+    min-height:auto;
+    align-items:flex-start;
+  }
+  .hero-inner{
+    grid-template-columns:1fr;
+    gap:40px;
+    max-width:100%;
+  }
+  .hero-photo{
+    width:120px;height:120px;
+    order:-1;
+  }
+  .hero-h1{font-size:clamp(30px,8vw,52px);}
+  .hero-bio{font-size:14px;max-width:100%;}
+  .hero-degree{font-size:11px;}
+  .hero-links{gap:10px;}
+  .hero-link{padding:9px 16px;font-size:10px;}
+
+  /* SECTIONS */
+  .section{padding:56px 28px;}
+  .section-h2{font-size:clamp(20px,5vw,30px);}
+  .section-header{margin-bottom:36px;}
+
+  /* EXPERIENCE */
+  .exp-item{
+    grid-template-columns:1fr;
+    gap:14px;
+    padding:28px 0;
+  }
+  .exp-item:hover{padding-left:12px;}
+
+  /* PROJECTS */
+  .proj-card{padding:24px 20px;}
+  .proj-top{flex-direction:column;gap:12px;align-items:flex-start;}
+  .proj-link-btn{align-self:flex-start;}
+  .proj-name{font-size:14px;}
+  .proj-bullet{font-size:13px;}
+
+  /* EDUCATION */
+  .edu-top{flex-direction:column;gap:6px;align-items:flex-start;}
+  .edu-period{white-space:normal;}
+  .edu-item{padding:24px 20px;}
+
+  /* SKILLS */
+  .skills-grid{grid-template-columns:repeat(2,1fr);gap:12px;}
+  .skill-group{padding:20px 16px;}
+
+  /* RESPONSIBILITIES */
+  .resp-item{padding:20px 18px;}
+
+  /* CERTIFICATES */
+  .cert-grid{grid-template-columns:1fr;gap:12px;}
+  .cert-card{padding:20px;}
+
+  /* CONTACT */
+  .contact-inner{
+    grid-template-columns:1fr;
+    gap:36px;
+  }
+  .contact-intro{font-size:14px;}
+  .contact-right-box{padding:24px;}
+
+  /* FOOTER */
+  footer{
+    padding:20px 28px;
+    flex-direction:column;
+    gap:6px;
+    text-align:center;
+  }
+}
+
+/* ══════════════════════════════════
+   MOBILE  ≤ 480px
+══════════════════════════════════ */
+@media(max-width:480px){
+  .hero{padding:68px 16px 44px;}
+  .section{padding:44px 16px;}
+  footer{padding:18px 16px;}
+
+  .hero-tag{font-size:9px;padding:4px 10px;}
+  .hero-h1{font-size:clamp(26px,9vw,40px);}
+  .hero-role{font-size:11px;}
+  .hero-bio{font-size:13px;}
+  .hero-photo{width:100px;height:100px;}
+  .hero-links{flex-direction:column;align-items:flex-start;}
+  .hero-link{width:100%;justify-content:center;padding:11px 16px;}
+
+  .section-h2{font-size:20px;}
+
+  /* exp */
+  .exp-role{font-size:13px;}
+  .exp-bullet{font-size:13px;}
+  .exp-company{font-size:12px;}
+
+  /* projects */
+  .proj-card{padding:18px 14px;}
+  .proj-name{font-size:13px;}
+  .proj-bullet{font-size:12px;}
+  .proj-stats{gap:8px;}
+  .proj-stat{font-size:9px;}
+
+  /* skills */
+  .skills-grid{grid-template-columns:repeat(2,1fr);gap:8px;}
+  .skill-group{padding:16px 12px;}
+  .skill-group-title{font-size:10px;}
+  .skill-item-text{font-size:10px;}
+
+  /* edu */
+  .edu-item{padding:18px 14px;}
+  .edu-degree{font-size:13px;}
+  .edu-detail{font-size:12px;}
+
+  /* resp */
+  .resp-item{padding:16px 14px;}
+  .resp-role{font-size:13px;}
+  .resp-bullet{font-size:12px;}
+
+  /* cert */
+  .cert-card{flex-direction:column;gap:12px;padding:18px;}
+  .cert-icon{width:38px;height:38px;font-size:16px;}
+  .cert-name{font-size:13px;}
+  .cert-desc{font-size:11px;}
+
+  /* contact */
+  .contact-link{padding:12px;}
+  .contact-link-val{font-size:12px;}
+  .contact-right-box{padding:18px;}
+  .contact-right-box p{font-size:13px;}
+}
+
+/* ══════════════════════════════════
+   VERY SMALL  ≤ 360px
+══════════════════════════════════ */
+@media(max-width:360px){
+  .skills-grid{grid-template-columns:1fr;}
+  .cert-grid{grid-template-columns:1fr;}
+  .hero-h1{font-size:clamp(22px,10vw,34px);}
+}
 </style>
 </head>
 <body>
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
+
+<!-- HAMBURGER TOGGLE -->
+<button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false">
+  <span></span><span></span><span></span>
+</button>
+<div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
 
 <!-- ══════════ SIDEBAR ══════════ -->
 <nav class="sidebar">
@@ -1201,6 +1428,37 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
   });
 });
+// ── HAMBURGER MENU ──
+const hamburger = document.getElementById('hamburger');
+const sidebarEl  = document.querySelector('.sidebar');
+const overlay    = document.getElementById('sidebarOverlay');
+
+function openMenu(){
+  hamburger.classList.add('open');
+  sidebarEl.classList.add('open');
+  overlay.classList.add('active');
+  hamburger.setAttribute('aria-expanded','true');
+  document.body.style.overflow='hidden';
+}
+function closeMenu(){
+  hamburger.classList.remove('open');
+  sidebarEl.classList.remove('open');
+  overlay.classList.remove('active');
+  hamburger.setAttribute('aria-expanded','false');
+  document.body.style.overflow='';
+}
+function toggleMenu(){ sidebarEl.classList.contains('open') ? closeMenu() : openMenu(); }
+
+hamburger.addEventListener('click', toggleMenu);
+overlay.addEventListener('click', closeMenu);
+
+// close on nav link tap (mobile)
+document.querySelectorAll('.nav-links a').forEach(a=>{
+  a.addEventListener('click',()=>{ if(window.innerWidth<=768) closeMenu(); });
+});
+
+// close on Escape key
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
 </script>
 </body>
 </html>
